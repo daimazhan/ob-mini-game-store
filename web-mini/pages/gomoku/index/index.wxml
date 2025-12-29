@@ -1,0 +1,62 @@
+<view class="container" style="padding-top: {{CustomBar}}px;">
+  <view class="game-header">
+    <view class="title">五子棋</view>
+    <view class="score-board">
+      <view class="score-item" bind:tap="goto">
+        <text class="score-label" >主页</text>
+        <text class="cuIcon-home score-value"></text>
+      </view>
+      <view class="score-item">
+        <text class="score-label">你</text>
+        <text class="score-value">{{blackWins}}</text>
+      </view>
+      <view class="score-item">
+        <text class="score-label">AI</text>
+        <text class="score-value">{{whiteWins}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-info">
+    <text class="current-player">{{currentPlayer === 'black' ? '你的回合' : 'AI思考中...'}}</text>
+  </view>
+
+  <view class="board-container">
+    <view class="board">
+      <view wx:for="{{board}}" wx:for-index="rowIdx" wx:for-item="row" wx:key="rowIdx" class="board-row">
+        <view wx:for="{{row}}" wx:for-index="colIdx" wx:for-item="cell" wx:key="colIdx"
+              class="board-cell"
+              data-row="{{rowIdx}}"
+              data-col="{{colIdx}}"
+              bindtap="onCellTap">
+          <view wx:if="{{cell === 'black'}}" class="piece black-piece"></view>
+          <view wx:if="{{cell === 'white'}}" class="piece white-piece"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-controls">
+    <button class="control-btn" bindtap="restart">重新开始</button>
+    <button class="control-btn secondary" bindtap="resetScore">重置战绩</button>
+  </view>
+
+  <view wx:if="{{gameOver}}" class="game-over">
+    <text class="game-over-text">{{winner === 'black' ? '🎉 恭喜获胜！' : '😔 AI获胜'}}</text>
+  </view>
+
+</view>
+<!-- 游戏规则 -->
+<view class="cu-modal {{modalName == 'gameRuleModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">游戏规则</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding bg-white" style="text-align: start;">
+        <text class="rules-text">黑棋先行，在横、竖或对角线上连成五个即可获胜。你执黑，AI执白。</text>
+      </view>
+    </view>
+  </view>

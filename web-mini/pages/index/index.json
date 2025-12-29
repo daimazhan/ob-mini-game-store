@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText":"游戏列表",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom/cu-custom"
+  }
+}

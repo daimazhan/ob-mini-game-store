@@ -1,0 +1,12 @@
+<view class="container bg-blue">
+  <cu-custom bgColor="bg-blue" isCustom="true" userPage="/pages/user/home/home" avatarUrl="{{userInfo? userInfo.avatarUrl? userInfo.avatarUrl : '' : ''}}">
+    <view slot="content">游戏列表</view>
+  </cu-custom>
+
+    <!-- 游戏列表 -->
+	<view wx:for="{{gameList}}" wx:key="id" wx:for-item="game" class="gameList nav-list">
+	    <button class="radius bg-green" disabled="{{disabled}}" bindtap="start{{game.id}}"> {{game.name}} </button>
+	</view>
+
+	<text class="more">更多内容，敬请期待...</text>
+</view>

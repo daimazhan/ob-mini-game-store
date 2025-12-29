@@ -1,0 +1,285 @@
+.container {
+  min-height: 100vh;
+  background: #faf8ef;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #776e65;
+}
+
+.scores {
+  display: flex;
+  gap: 20rpx;
+}
+
+.score-box {
+  background: #bbada0;
+  padding: 15rpx 20rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  min-width: 120rpx;
+}
+
+.score-label {
+  display: block;
+  font-size: 22rpx;
+  color: #eee4da;
+  text-transform: uppercase;
+  margin-bottom: 8rpx;
+}
+
+.score-value {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.game-container {
+  width: 100%;
+  margin-bottom: 30rpx;
+}
+
+.board-wrapper {
+  width: 100%;
+  max-width: 600rpx;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 使用padding-bottom技巧实现正方形 */
+.board-wrapper::before {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
+
+.board {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #bbada0;
+  border-radius: 12rpx;
+  padding: 12rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  margin-bottom: 12rpx;
+  flex: 1;
+  min-height: 0;
+}
+
+.row:last-child {
+  margin-bottom: 0;
+}
+
+.cell {
+  flex: 1;
+  background: rgba(238, 228, 218, 0.35);
+  border-radius: 6rpx;
+  margin-right: 12rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.cell:last-child {
+  margin-right: 0;
+}
+
+.tile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48rpx;
+  font-weight: bold;
+  border-radius: 6rpx;
+  color: #776e65;
+  box-sizing: border-box;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+/* 不同数字的样式 */
+.tile-2 {
+  background: #eee4da;
+  font-size: 48rpx;
+}
+
+.tile-4 {
+  background: #ede0c8;
+  font-size: 48rpx;
+}
+
+.tile-8 {
+  background: #f2b179;
+  color: #f9f6f2;
+  font-size: 48rpx;
+}
+
+.tile-16 {
+  background: #f59563;
+  color: #f9f6f2;
+  font-size: 44rpx;
+}
+
+.tile-32 {
+  background: #f67c5f;
+  color: #f9f6f2;
+  font-size: 44rpx;
+}
+
+.tile-64 {
+  background: #f65e3b;
+  color: #f9f6f2;
+  font-size: 40rpx;
+}
+
+.tile-128 {
+  background: #edcf72;
+  color: #f9f6f2;
+  font-size: 36rpx;
+  box-shadow: 0 0 30rpx 10rpx rgba(243, 215, 116, 0.3);
+}
+
+.tile-256 {
+  background: #edcc61;
+  color: #f9f6f2;
+  font-size: 36rpx;
+  box-shadow: 0 0 30rpx 10rpx rgba(243, 215, 116, 0.4);
+}
+
+.tile-512 {
+  background: #edc850;
+  color: #f9f6f2;
+  font-size: 32rpx;
+  box-shadow: 0 0 30rpx 10rpx rgba(243, 215, 116, 0.5);
+}
+
+.tile-1024 {
+  background: #edc53f;
+  color: #f9f6f2;
+  font-size: 28rpx;
+  box-shadow: 0 0 30rpx 10rpx rgba(243, 215, 116, 0.6);
+}
+
+.tile-2048 {
+  background: #edc22e;
+  color: #f9f6f2;
+  font-size: 28rpx;
+  box-shadow: 0 0 30rpx 10rpx rgba(243, 215, 116, 0.7);
+}
+
+/* 大于2048的数字 */
+.tile-4096,
+.tile-8192 {
+  background: #3c3a32;
+  color: #f9f6f2;
+  font-size: 24rpx;
+}
+
+.controls {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.btn {
+  background: #8f7a66;
+  color: #f9f6f2;
+  border: none;
+  border-radius: 8rpx;
+  padding: 20rpx 40rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+.hint {
+  text-align: center;
+  color: #776e65;
+  font-size: 24rpx;
+}
+
+/* 响应式设计 - 小屏幕 */
+@media screen and (max-width: 400px) {
+  .title {
+    font-size: 48rpx;
+  }
+
+  .score-box {
+    min-width: 100rpx;
+    padding: 12rpx 16rpx;
+  }
+
+  .score-label {
+    font-size: 20rpx;
+  }
+
+  .score-value {
+    font-size: 28rpx;
+  }
+
+  .tile {
+    font-size: 36rpx;
+  }
+
+  .tile-2,
+  .tile-4 {
+    font-size: 36rpx;
+  }
+
+  .tile-8,
+  .tile-16,
+  .tile-32 {
+    font-size: 32rpx;
+  }
+
+  .tile-64 {
+    font-size: 28rpx;
+  }
+
+  .tile-128,
+  .tile-256 {
+    font-size: 24rpx;
+  }
+
+  .tile-512 {
+    font-size: 22rpx;
+  }
+
+  .tile-1024,
+  .tile-2048 {
+    font-size: 20rpx;
+  }
+}
+
+/* 使用rpx单位确保在不同屏幕尺寸下自适应 */
+@media screen and (min-width: 750px) {
+  .board {
+    max-width: 600rpx;
+  }
+}

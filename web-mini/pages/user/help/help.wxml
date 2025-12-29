@@ -1,0 +1,22 @@
+<scroll-view scroll-y class="scrollPage">
+  <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">帮助和指南</view>
+  </cu-custom>
+
+  <view class="cu-card article ">
+    <view class="cu-item shadow margin-sm" wx:for="{{helpData}}" wx:key="index">
+      <view class="title">
+        <view class="text-cut">{{item.title}}</view>
+      </view>
+      <view class="content">
+        <view class="desc">
+          <view class="text-content">{{item.content}}</view>
+          <view>
+            <view class="cu-tag bg-{{item.color}} light sm round">{{item.category}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

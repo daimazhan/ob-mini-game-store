@@ -1,0 +1,66 @@
+<view class="container" style="padding-top: {{CustomBar}}px;">
+  <view class="game-header">
+    <view class="title">射击游戏<text bind:tap="showModal" data-target="gameRuleModal" class="text-light light cuIcon-question padding-left-sm"></text></view>
+    <view class="stats">
+      <view class="stat-item" bind:tap="goto">
+        <text class="score-label">主页</text>
+        <text class="cuIcon-home score-value"></text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">分数</text>
+        <text class="stat-value">{{score}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">最佳</text>
+        <text class="stat-value">{{bestScore}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-area">
+    <canvas 
+      canvas-id="gameCanvas" 
+      class="game-canvas"
+      bindtouchmove="onTouchMove"
+      bindtouchstart="onTouchStart"
+      style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"
+      disable-scroll="true">
+    </canvas>
+    
+    <view wx:if="{{!gameStarted}}" class="start-overlay">
+      <view class="start-content">
+        <text class="start-title">射击游戏</text>
+        <text class="start-desc">触摸屏幕移动飞船</text>
+        <text class="start-desc">子弹自动发射</text>
+        <button class="start-btn" bindtap="startGame">开始游戏</button>
+      </view>
+    </view>
+
+    <view wx:if="{{gameOver}}" class="game-over-overlay">
+      <view class="game-over-content">
+        <text class="game-over-title">游戏结束</text>
+        <text class="game-over-score">得分：{{score}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-controls">
+    <button class="control-btn" bindtap="restart">重新开始</button>
+    <button class="control-btn secondary" bindtap="resetBest">重置最佳</button>
+  </view>
+
+</view>
+<!-- 游戏规则 -->
+<view class="cu-modal {{modalName == 'gameRuleModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">游戏规则</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding bg-white" style="text-align: start;">
+        <text class="rules-text">触摸屏幕移动飞船，子弹会自动发射消灭敌人。每消灭一个敌人得10分。被敌人撞到游戏结束！</text>
+      </view>
+    </view>
+  </view>

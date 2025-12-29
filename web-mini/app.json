@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/2048/index/index",
+    "pages/tictactoe/index/index",
+    "pages/memory/index/index",
+    "pages/puzzle15/index/index",
+    "pages/spotdiff/index/index",
+    "pages/numberelim/index/index",
+    "pages/gomoku/index/index",
+    "pages/shooter/index/index",
+    "pages/breakout/index/index",
+    "pages/sokoban/index/index",
+    "pages/user/home/home",
+    "pages/user/help/help",
+    "pages/user/requirement/requirement"
+  ],
+  "window": {
+    "navigationBarTitleText": "游戏盒子",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#ffc107",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#fff"
+  }
+}

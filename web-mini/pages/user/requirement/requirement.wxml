@@ -1,0 +1,23 @@
+<scroll-view class="scrollPage bg-white" style="min-height: calc(100vh - 84rpx);">
+  <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">需求定制</view>
+  </cu-custom>
+
+  <form bindsubmit="sendRequire" style="min-height: 100%;">
+    <view class="cu-form-group radius">
+      <input name="contactInfo" value="{{contactInfo}}" maxlength="36" placeholder="联系方式：手机、微信、QQ、邮箱……" />
+    </view>
+    <view class="cu-form-group radius">
+      <textarea name="content" value="{{content}}" maxlength="1000" style="height: calc(100vh - 500rpx);" placeholder="请在这里描述您的需求/建议等信息" />
+    </view>
+
+    <view class="cu-bar foot input" style="bottom:0px">
+      <view class="action">
+        <button class="cuIcon-service cu-btn block line-green" open-type="contact" bindcontact="handleContact">直接聊</button>
+      </view>
+      <!-- <button class="cu-btn bg-green shadow">发送</button> -->
+      <button class="cuIcon-upload cu-btn block line-blue lg" form-type="submit" disabled="{{submitting}}">{{submitting ? '提交中...' : '发送'}}</button>
+    </view>
+  </form>
+</scroll-view>

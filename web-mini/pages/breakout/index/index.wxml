@@ -1,0 +1,50 @@
+<view class="container" style="padding-top: {{CustomBar}}px;">
+  <view class="game-header">
+    <view class="title">打砖块<text bindtap="showModal" data-target="gameRuleModal" class="text-light light cuIcon-question padding-left-sm"></text></view>
+    <view class="stats">
+      <view class="stat-item" bind:tap="goto">
+        <text class="score-label">主页</text>
+        <text class="cuIcon-home score-value"></text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">分数</text>
+        <text class="stat-value">{{score}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">最佳</text>
+        <text class="stat-value">{{bestScore}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="canvas-container" bindtouchmove="movePaddle">
+    <canvas canvas-id="gameCanvas" class="game-canvas" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"></canvas>
+  </view>
+
+  <view class="game-controls">
+    <button class="control-btn" bindtap="restart">重新开始</button>
+    <button class="control-btn secondary" bindtap="resetBest">重置最佳</button>
+  </view>
+
+  <view wx:if="{{gameOver}}" class="game-over">
+    <text class="game-over-text">游戏结束</text>
+  </view>
+
+  <view wx:if="{{!gameStarted && !gameOver}}" class="game-start">
+    <text class="start-text">触摸屏幕移动挡板开始游戏</text>
+  </view>
+</view>
+<!-- 游戏规则 -->
+<view class="cu-modal {{modalName == 'gameRuleModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">游戏规则</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding bg-white" style="text-align: start;">
+      <text class="rules-text">触摸屏幕左右移动挡板，用挡板反弹小球来击打砖块。消除所有砖块即可通关！注意不要让小球掉到底部。</text>
+    </view>
+  </view>
+</view>

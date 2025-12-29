@@ -1,0 +1,61 @@
+<view class="container" style="padding-top: {{CustomBar}}px;">
+  <view class="game-header">
+    <view class="title">数字华容道<text bind:tap="showModal" data-target="gameRuleModal" class="text-light light cuIcon-question padding-left-sm"></text></view>
+    <view class="stats">
+      <view class="stat-item" bind:tap="goto">
+        <text class="score-label">主页</text>
+        <text class="cuIcon-home score-value"></text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">步数</text>
+        <text class="stat-value">{{moves}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">时间</text>
+        <text class="stat-value">{{elapsedTimeStr}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="best-scores">
+    <text class="best-text">最佳: {{bestTimeStr}} / {{bestMoves || '-'}}步</text>
+  </view>
+
+  <view class="game-board">
+    <view class="board-grid">
+      <view wx:for="{{board}}" wx:for-index="rowIdx" wx:for-item="row" wx:key="rowIdx" class="board-row">
+        <view wx:for="{{row}}" wx:for-index="colIdx" wx:for-item="tile" wx:key="colIdx"
+              class="tile {{tile === 0 ? 'empty' : ''}}"
+              data-row="{{rowIdx}}"
+              data-col="{{colIdx}}"
+              bindtap="onTileTap">
+          <text wx:if="{{tile !== 0}}" class="tile-number">{{tile}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-controls">
+    <button class="control-btn" bindtap="restart">重新开始</button>
+    <button class="control-btn secondary" bindtap="resetBest">重置最佳</button>
+  </view>
+
+  <view wx:if="{{gameWon}}" class="game-over">
+    <text class="game-over-text">🎉 恭喜完成！</text>
+  </view>
+
+</view>
+<!-- 游戏规则 -->
+<view class="cu-modal {{modalName == 'gameRuleModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">游戏规则</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding bg-white" style="text-align: start;">
+        <text class="rules-text">点击与空格相邻的数字方块，将它们按1-15的顺序排列，空格在右下角。</text>
+      </view>
+    </view>
+  </view>

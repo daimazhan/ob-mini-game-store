@@ -1,0 +1,94 @@
+<view class="container" style="padding-top: {{CustomBar}}px;">
+  <view class="game-header">
+    <view class="title">找不同<text bind:tap="showModal" data-target="gameRuleModal" class="text-light light cuIcon-question padding-left-sm"></text></view>
+    <view class="stats">
+      <view class="stat-item" bind:tap="goto">
+        <text class="score-label">主页</text>
+        <text class="cuIcon-home score-value"></text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">关卡</text>
+        <text class="stat-value">{{level}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">时间</text>
+        <text class="stat-value">{{timeStr}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="progress-info">
+    <text class="progress-text">找到: {{foundCount}}/{{totalDifferences}}</text>
+    <text class="best-text">最佳: {{bestTimeStr}}</text>
+  </view>
+
+  <view class="game-board">
+    <view class="grid-container">
+      <view class="grid-label">左图</view>
+      <view class="grid-label">右图</view>
+    </view>
+    <view class="grids-wrapper">
+      <view class="grid left-grid">
+        <view wx:for="{{leftGrid}}" wx:for-index="rowIdx" wx:for-item="row" wx:key="rowIdx" class="grid-row">
+          <view wx:for="{{row}}" wx:for-index="colIdx" wx:for-item="cell" wx:key="colIdx"
+                class="grid-cell"
+                style="background-color: {{cell.bgColor}}; {{cellHeight ? 'height: ' + cellHeight + ';' : ''}}"
+                data-row="{{rowIdx}}"
+                data-col="{{colIdx}}"
+                bindtap="onGridTap">
+            <text wx:if="{{cell.icon}}" class="cell-icon {{cell.isDot ? 'dot' : ''}}">{{cell.icon}}</text>
+            <view wx:if="{{cell.shape === 'circle'}}" class="shape-circle" style="background-color: {{cell.shapeColor || '#ff6b6b'}}"></view>
+            <view wx:if="{{cell.shape === 'square'}}" class="shape-square" style="background-color: {{cell.shapeColor || '#ff6b6b'}}"></view>
+            <view wx:if="{{cell.shape === 'triangle'}}" class="shape-triangle" style="border-bottom-color: {{cell.shapeColor || '#ff6b6b'}}"></view>
+            <view wx:for="{{differences}}" wx:key="index" wx:for-item="diff">
+              <view wx:if="{{diff.row === rowIdx && diff.col === colIdx && diff.found}}" class="difference-found">O</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="grid right-grid">
+        <view wx:for="{{rightGrid}}" wx:for-index="rowIdx" wx:for-item="row" wx:key="rowIdx" class="grid-row">
+          <view wx:for="{{row}}" wx:for-index="colIdx" wx:for-item="cell" wx:key="colIdx"
+                class="grid-cell"
+                style="background-color: {{cell.bgColor}}; {{cellHeight ? 'height: ' + cellHeight + ';' : ''}}"
+                data-row="{{rowIdx}}"
+                data-col="{{colIdx}}"
+                bindtap="onGridTap">
+            <text wx:if="{{cell.icon}}" class="cell-icon {{cell.isDot ? 'dot' : ''}}">{{cell.icon}}</text>
+            <view wx:if="{{cell.shape === 'circle'}}" class="shape-circle" style="background-color: {{cell.shapeColor || '#ff6b6b'}}"></view>
+            <view wx:if="{{cell.shape === 'square'}}" class="shape-square" style="background-color: {{cell.shapeColor || '#ff6b6b'}}"></view>
+            <view wx:if="{{cell.shape === 'triangle'}}" class="shape-triangle" style="border-bottom-color: {{cell.shapeColor || '#ff6b6b'}}"></view>
+            <view wx:for="{{differences}}" wx:key="index" wx:for-item="diff">
+              <view wx:if="{{diff.row === rowIdx && diff.col === colIdx && diff.found}}" 
+                    class="difference-found">✓</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-controls">
+    <button class="control-btn" bindtap="restart">重新开始</button>
+    <button class="control-btn secondary" bindtap="resetBest">重置最佳</button>
+  </view>
+
+  <view wx:if="{{gameWon}}" class="game-over">
+    <text class="game-over-text">🎉 恭喜完成！</text>
+  </view>
+
+</view>
+<!-- 游戏规则 -->
+<view class="cu-modal {{modalName == 'gameRuleModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">游戏规则</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding bg-white" style="text-align: start;">
+        <text class="rules-text">仔细观察左右两图，找出5处不同。点击不同之处即可标记，全部找到即可通关！</text>
+      </view>
+    </view>
+  </view>

@@ -1,0 +1,101 @@
+.container {
+  min-height: 100vh;
+  background: #000;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-header {
+  width: 100%;
+  max-width: 500rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.stats {
+  display: flex;
+  gap: 15rpx;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10rpx 15rpx;
+  border-radius: 8rpx;
+}
+
+.stat-label {
+  font-size: 20rpx;
+  color: #fff;
+  opacity: 0.8;
+  margin-bottom: 5rpx;
+}
+
+.stat-value {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.canvas-container {
+  width: 100%;
+  max-width: 500rpx;
+  margin-bottom: 30rpx;
+  background: #000;
+  border: 2rpx solid #333;
+  border-radius: 8rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.game-canvas {
+  width: 100%;
+  display: block;
+}
+
+.game-controls {
+  width: 100%;
+  max-width: 500rpx;
+  display: flex;
+  gap: 15rpx;
+  margin-bottom: 20rpx;
+}
+
+.control-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}
+
+.control-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.control-btn:active {
+  opacity: 0.8;
+}
+
+.game-over,
+.game-start {
+  text-align: center;
+  color: #fff;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}

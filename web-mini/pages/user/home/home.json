@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "个人中心",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom/cu-custom"
+  }
+}

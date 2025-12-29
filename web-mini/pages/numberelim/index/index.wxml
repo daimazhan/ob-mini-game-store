@@ -1,0 +1,75 @@
+<wxs module="utils">
+var isSelected = function(selectedMap, row, col) {
+  var key = row + '-' + col;
+  return selectedMap[key] === true;
+}
+module.exports = {
+  isSelected: isSelected
+};
+</wxs>
+
+<view class="container" style="padding-top: {{CustomBar}}px;">
+  <view class="game-header">
+    <view class="title">数字消除<text bind:tap="showModal" data-target="gameRuleModal" class="text-light light cuIcon-question padding-left-sm"></text></view>
+    <view class="stats">
+      <view class="stat-item" bind:tap="goto">
+        <text class="score-label">主页</text>
+        <text class="cuIcon-home score-value"></text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">分数</text>
+        <text class="stat-value">{{score}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">目标</text>
+        <text class="stat-value">{{targetScore}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-info">
+    <text class="info-text">关卡 {{level}} | 最佳: {{bestScore}}</text>
+  </view>
+
+  <view class="game-board">
+    <view class="board-grid">
+      <view wx:for="{{board}}" wx:for-index="rowIdx" wx:for-item="row" wx:key="rowIdx" class="board-row">
+        <view wx:for="{{row}}" wx:for-index="colIdx" wx:for-item="cell" wx:key="colIdx"
+              class="board-cell {{utils.isSelected(selectedMap, rowIdx, colIdx) ? 'selected' : ''}}"
+              data-row="{{rowIdx}}"
+              data-col="{{colIdx}}"
+              bindtap="onCellTap">
+          <text class="cell-number">{{cell}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="game-controls">
+    <button class="control-btn primary" bindtap="eliminate">消除</button>
+    <button class="control-btn" bindtap="restart">重新开始</button>
+    <button class="control-btn secondary" bindtap="resetBest">重置最佳</button>
+  </view>
+
+  <view class="selected-info">
+    <text class="selected-text">已选择: {{selectedCells.length}} 个</text>
+    <text wx:if="{{selectedCells.length > 0}}" class="sum-text">
+      和: {{selectedSum}}
+    </text>
+  </view>
+
+</view>
+<!-- 游戏规则 -->
+<view class="cu-modal {{modalName == 'gameRuleModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">游戏规则</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding bg-white" style="text-align: start;">
+        <text class="rules-text">选择多个数字，使它们的和是10的倍数（≥10），点击"消除"即可得分。达到目标分数即可通关！</text>
+      </view>
+    </view>
+  </view>

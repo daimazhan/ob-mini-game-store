@@ -1,0 +1,177 @@
+<scroll-view scroll-y class="scrollPage" style="min-height:calc(100vh - {{CustomBar}}px);">
+  <cu-custom bgColor="bg-white" isBack="true">
+    <view slot="backText">返回</view>
+    <view slot="content">个人中心</view>
+  </cu-custom>
+  <!-- 页面 -->
+  <view class="">
+    <!-- 顶部个人信息 -->
+    <view class="bg-white radius-lg-bottom">
+      <view class="flex padding">
+        <view class="padding-lr-xs">
+          <button class="cu-avatar lg round" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar" style="{{userInfo.avatarUrl != null? 'background-image:url(' + userInfo.avatarUrl + ')' : ''}}"></button>
+        </view>
+        <view class="padding-xs text-xl text-black">
+          <view bindtap="showModal" data-target="nicknameModal">{{userInfo.nickname}}</view>
+          <view class="cu-tag round line-green sm">积分：{{userInfo.points}}</view>
+          <view class="text-red text text-bold flex justify-between">
+            <text>祝您玩得开心愉快！！！</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 基本数据 -->
+    <!-- <view class="cu-list grid col-4 no-border padding-lr-xs radius-lg-bottom">
+      <view class="cu-item">
+        <view class="text-black text-bold text-xxl">
+          6
+        </view>
+        <text>优惠券</text>
+      </view>
+      <view class="cu-item">
+        <view class="text-black text-bold text-xxl">
+          0
+        </view>
+        <text>权益卡</text>
+      </view>
+      <view class="cu-item">
+        <view class="text-black text-bold text-xxl">
+          4
+        </view>
+        <text>保修卡</text>
+      </view>
+      <view class="cu-item">
+        <view class="text-black text-bold text-xxl">
+          11
+        </view>
+        <text>收据</text>
+      </view>
+    </view> -->
+
+    <!-- 常用功能 -->
+    <view class="cu-bar margin-lr-xs margin-top-xs grid col-4 no-border bg-white radius-lg-top">
+      <view class="action">
+        <text class="text-xl text-black">常用功能</text>
+      </view>
+      <view class="action">
+        <text class="text-lg">全部功能<text class="cuIcon-right"></text></text>
+      </view>
+    </view>
+    <view class="cu-list grid col-4 no-border text-black margin-lr-xs padding-bottom radius-lg-bottom">
+      <view class="cu-item" bind:tap="goTo" data-url="/pages/user/requirement/requirement">
+        <view class="cuIcon-formfill text-purple text-shadow" style="font-size: 56rpx;">
+        </view>
+        <text>建议/留言</text>
+      </view>
+
+      <view class="cu-item" bind:tap="goTo" data-url="/pages/user/help/help">
+        <view class="cuIcon-questionfill text-green text-shadow" style="font-size: 56rpx;">
+        </view>
+        <text>常见问题</text>
+      </view>
+
+      <button class="cu-item bg-white" open-type="contact" style="display: flex; justify-content: center; align-items: center;">
+        <view class="cu-avatar ">
+          <view class="cuIcon-servicefill text-blue text-shadow" style="font-size: 56rpx;"></view>
+        </view>
+        <text class="padding-top-xs">人工咨询</text>
+      </button>
+
+      <view class="cu-item" bind:tap="showModal" data-target="signInModal">
+        <view class="cuIcon-formfill {{isSignedIn ? 'text-green' : 'text-gray'}} text-shadow" style="font-size: 56rpx;">
+          <view class="cu-tag badge" wx:if="{{!isSignedIn}}">
+            <block wx:if="{{!isSignedIn}}"></block>
+          </view>
+        </view>
+        <text>{{isSignedIn? '已签到' : '未签到'}}</text>
+      </view>
+    </view>
+  </view>
+  <!-- 业务声明 -->
+  <!-- <view class="padding-sm margin-xs solid-bottom bg-white radius-lg">
+    <text class="text-xl text-bold text-red padding-bottom margin-bt-60px"><text class="cuIcon-info"></text>郑重声明</text>
+    <view class="text-light margin-top-sm">
+      <text class="text-light">本程序不涉及提供线上售彩交、推荐、模拟玩法、竞彩等服务</text>
+    </view>
+  </view> -->
+  <!-- 数据来源 -->
+  <!-- <view class="padding-sm margin-xs solid-bottom bg-white radius-lg">
+    <text class="text-xl text-bold text-blue padding-bottom margin-bt-60px"><text class="cuIcon-info"></text>数据来源</text>
+    <view class="text-light margin-top-sm">
+      <text class="text-light">中国福彩（www.cwl.gov.cn）</text>
+    </view>
+    <view class="text-light">
+      <text class="text-light">中国体彩（www.lottery.gov.cn）</text>
+    </view>
+  </view> -->
+
+  <!-- 昵称修改 -->
+  <view class="cu-modal {{modalName=='nicknameModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">修改昵称</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding-xl bg-white">
+        <view class="cu-form-group">
+          <input type="nickname" placeholder="请输入昵称" value="{{userInfo.nickname}}" bindinput="onNicknameChange" bindblur="onNicknameChange" />
+        </view>
+      </view>
+      <view class="cu-bar bg-white justify-end">
+        <view class="action">
+          <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+          <button class="cu-btn bg-green margin-left" bindtap="commitNickname">确定</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 积分签到 -->
+  <view class="cu-modal {{modalName == 'signInModal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">积分签到</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding bg-white" style="text-align: center;">
+        <view class="padding-xl">
+          <view class="text-xl text-bold margin-bottom-lg">
+            <text class="cuIcon-post {{isSignedIn ? 'text-green' : 'text-gray'}}" style="font-size: 80rpx;"></text>
+          </view>
+          <view class="text-lg margin-bottom" wx:if="{{isSignedIn}}">
+            <text class="text-green">今日已签到</text>
+          </view>
+          <view class="text-lg margin-bottom" wx:else>
+            <text class="text-gray">今日未签到</text>
+          </view>
+          <view class="text-sm text-gray margin-bottom-lg">
+            <text>当前积分：</text>
+            <text class="text-red text-bold">{{userPoints}}</text>
+          </view>
+          <view class="text-sm text-gray margin-bottom-xl">
+            <text>签到可获得</text>
+            <text class="text-red text-bold">10</text>
+            <text>积分</text>
+          </view>
+          <button class="cu-btn bg-green round lg" bindtap="doSignIn" disabled="{{isSignedIn}}" wx:if="{{!isSignedIn}}">
+            立即签到
+          </button>
+          <button class="cu-btn line-gray round lg" disabled="{{true}}" wx:else>
+            今日已签到
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 隐私声明 -->
+<view class="text-center padding-tb bg-gray">
+  <text bind:tap="showPrivacyContract" class="text-sm text-light text-blue">声明和隐私保护</text>
+  <view class="colorui-text padding-top-xs">Copyright © 2025 弈圣科技 All Rights Reserved.</view>
+</view>
